@@ -53,6 +53,17 @@ public class LeetCodeLeaderboard {
     public void removeParticipant(String username) {
         jedis.zrem(LEADERBOARD_KEY, username);
     }
+    public void displayLeaderboard(int page, int pageSize) {
+        int start = (page - 1) * pageSize;
+        int stop = start + pageSize - 1;
+
+        List<String> users = jedis.zrevrange("leetcode_leaderboard", start, stop);
+        System.out.println("Page " + page + ":");
+        for (String user : users) {
+            System.out.println(user);
+        }
+    }
+
 
     public static void main(String[] args) {
         // Create a leaderboard instance
