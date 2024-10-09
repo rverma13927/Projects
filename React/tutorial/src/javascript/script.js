@@ -145,7 +145,7 @@ function getBook(id) {
 
 //Destructuring
 
-const book = getBook(2);
+const book = getBook(1);
 
 // const title = book.title;
 
@@ -157,6 +157,24 @@ console.log(title, author, pages, publicationDate, genres);
 
 // const secondaryGenre  = genres[1];
 
-const [primaryGenre, secondaryGenre] = genres;
+/*
+ *https://www.freecodecamp.org/news/javascript-rest-vs-spread-operators/
+ */
+//Rest operator
+const [primaryGenre, secondaryGenre, ...otherGeneres] = genres;
 
-console.log(primaryGenre, secondaryGenre);
+console.log(primaryGenre, secondaryGenre, otherGeneres);
+
+// Spread operator
+const newGenres = ["epic fatansy", ...genres];
+
+console.log(newGenres);
+
+// spread book otherwise book key will override the value
+const updatedBook = {
+  ...book,
+  moviePublicationDate: "2001-12-19",
+  pages: "2010",
+};
+
+updatedBook;
