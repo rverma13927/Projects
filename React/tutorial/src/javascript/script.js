@@ -178,3 +178,12 @@ const updatedBook = {
 };
 
 updatedBook;
+
+//Template literals : https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Template_literals
+const summary = `HI my name is ${book.title} ${2 + 4}`;
+
+summary;
+
+// Multi-line strings
+console.log(`string text line 1
+  string text line 2`);
