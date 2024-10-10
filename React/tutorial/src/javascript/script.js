@@ -187,3 +187,33 @@ summary;
 // Multi-line strings
 console.log(`string text line 1
   string text line 2`);
+
+//optional chaining
+
+const adventurer = {
+  name: "Alice",
+  cat: {
+    name: "Dinah",
+  },
+};
+
+const dogName = adventurer.dog?.name;
+console.log(dogName);
+// Expected output: undefined
+
+// console.log(adventurer.someNonExistentMethod?.());
+// // Expected output: undefined
+
+// const conditionalVal = adventurer.dog?name ? adventurer.dog.name : ;
+
+// conditionalVal;
+
+// Array reduce
+
+var list = [6, 1, 2, 3, 4];
+
+const red = list.reduce((prev, ele) => prev + ele, 0);
+
+red;
+
+list.sort();
