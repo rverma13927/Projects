@@ -135,85 +135,116 @@ const data = [
   },
 ];
 
-function getBooks() {
-  return data;
-}
+// function getBooks() {
+//   return data;
+// }
 
-function getBook(id) {
-  return data.find((d) => d.id === id);
-}
+// function getBook(id) {
+//   return data.find((d) => d.id === id);
+// }
 
-//Destructuring
+// //Destructuring
 
-const book = getBook(1);
+// const book = getBook(1);
 
-// const title = book.title;
+// // const title = book.title;
 
-const { title, author, pages, publicationDate, genres } = book;
+// const { title, author, pages, publicationDate, genres } = book;
 
-console.log(title, author, pages, publicationDate, genres);
+// console.log(title, author, pages, publicationDate, genres);
 
-// const primaryGenre  = genres[0];
+// // const primaryGenre  = genres[0];
 
-// const secondaryGenre  = genres[1];
+// // const secondaryGenre  = genres[1];
 
-/*
- *https://www.freecodecamp.org/news/javascript-rest-vs-spread-operators/
- */
-//Rest operator
-const [primaryGenre, secondaryGenre, ...otherGeneres] = genres;
+// /*
+//  *https://www.freecodecamp.org/news/javascript-rest-vs-spread-operators/
+//  */
+// //Rest operator
+// const [primaryGenre, secondaryGenre, ...otherGeneres] = genres;
 
-console.log(primaryGenre, secondaryGenre, otherGeneres);
+// console.log(primaryGenre, secondaryGenre, otherGeneres);
 
-// Spread operator
-const newGenres = ["epic fatansy", ...genres];
+// // Spread operator
+// const newGenres = ["epic fatansy", ...genres];
 
-console.log(newGenres);
+// console.log(newGenres);
 
-// spread book otherwise book key will override the value
-const updatedBook = {
-  ...book,
-  moviePublicationDate: "2001-12-19",
-  pages: "2010",
-};
+// // spread book otherwise book key will override the value
+// const updatedBook = {
+//   ...book,
+//   moviePublicationDate: "2001-12-19",
+//   pages: "2010",
+// };
 
-updatedBook;
+// updatedBook;
 
-//Template literals : https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Template_literals
-const summary = `HI my name is ${book.title} ${2 + 4}`;
+// //Template literals : https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Template_literals
+// const summary = `HI my name is ${book.title} ${2 + 4}`;
 
-summary;
+// summary;
 
-// Multi-line strings
-console.log(`string text line 1
-  string text line 2`);
+// // Multi-line strings
+// console.log(`string text line 1
+//   string text line 2`);
 
-//optional chaining
+// //optional chaining
 
-const adventurer = {
-  name: "Alice",
-  cat: {
-    name: "Dinah",
-  },
-};
+// const adventurer = {
+//   name: "Alice",
+//   cat: {
+//     name: "Dinah",
+//   },
+// };
 
-const dogName = adventurer.dog?.name;
-console.log(dogName);
-// Expected output: undefined
-
-// console.log(adventurer.someNonExistentMethod?.());
+// const dogName = adventurer.dog?.name;
+// console.log(dogName);
 // // Expected output: undefined
 
-// const conditionalVal = adventurer.dog?name ? adventurer.dog.name : ;
+// // console.log(adventurer.someNonExistentMethod?.());
+// // // Expected output: undefined
 
-// conditionalVal;
+// // const conditionalVal = adventurer.dog?name ? adventurer.dog.name : ;
 
-// Array reduce
+// // conditionalVal;
 
-var list = [6, 1, 2, 3, 4];
+// // Array reduce
 
-const red = list.reduce((prev, ele) => prev + ele, 0);
+// var list = [6, 1, 2, 3, 4];
 
-red;
+// const red = list.reduce((prev, ele) => prev + ele, 0);
 
-list.sort();
+// red;
+
+// //slice copy the array
+
+// list.slice().sort();
+
+// const newBook = {
+//   id: "1",
+//   name: "hi",
+// };
+// const bookAfterAdd = [...data, newBook];
+// bookAfterAdd;
+
+// // delete book object
+
+// const bookAfterDelete = bookAfterAdd.filter((book) => book.id !== 3);
+
+// // update book object
+
+// const bookAfterUPdate = bookAfterDelete.map((book) =>
+//   book.id == 1 ? {} : book
+// );
+
+//Promise
+
+async function getTodos() {
+  const res = await fetch("https://jsonplaceholder.typicode.com/todos/1");
+  const data = await res.json();
+  console.log(data);
+  // it will wait tille api complete then it will execute below.
+  console.log(2343);
+}
+getTodos();
+console.log(190);
