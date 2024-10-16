@@ -1,4 +1,4 @@
-package org.example;
+package org.example.RepoAndService;
 
 import org.example.annotation.Component;
 
