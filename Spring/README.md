@@ -25,13 +25,37 @@ First commit:
 How can we create our own annotation in java and use them with the help of reflection
 We created two annotation and applicationContext to store all the object of the classes annotated with those annotation.
 
-Second commit:
+7. AOP (Aspect-Oriented Programming)
 
-Lets implement PostConstruct and PreDestroy
+Implement an aspect mechanism that allows you to apply cross-cutting concerns like logging, transactions, etc.
 
-we create postConstruct annotation
-valid for methods
+    You can implement this using proxy objects. A simple way is to create dynamic proxies using Java's Proxy class or using a third-party library like CGLib for class-based proxying.
 
-we will be using inside our class
-@PostConstruct
+8. Transaction Management
+
+You can introduce a @Transactional annotation and wrap method calls in transactional logic, rolling back or committing
+transactions based on exceptions.
+
+Example:
+
+    Define a @Transactional annotation and apply transaction logic before and after method execution using proxies.
+
+9. Spring-Like Features You Can Add Gradually
+
+Once you have your basic DI and IoC container working, you can start building more Spring-like features, such as:
+
+    Aspect-Oriented Programming (AOP) for cross-cutting concerns.
+    Data Access Layer: Implement your version of Spring Data JPA.
+    MVC Framework: Build a lightweight MVC framework to handle HTTP requests and map them to controller methods.
+    Security Framework: Develop security features similar to Spring Security for authentication and authorization.
+
+Logging:
+
+Hierarchy of Log Levels (From Least to Most Verbose):
+
+    ERROR: Logs only critical failures.
+    WARN: Logs warnings and errors.
+    INFO: Logs informational messages, warnings, and errors.
+    DEBUG: Logs debugging information, including informational, warnings, and errors.
+    TRACE: Logs everything, including trace, debug, info, warnings, and errors.
 
