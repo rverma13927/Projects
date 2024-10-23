@@ -21,6 +21,7 @@ public class RateLimitingHandler implements HandlerInterceptor {
         Bucket bucket = bucketService.getBucket(userId);
         if (bucket.tryConsume(1)) {
             System.out.println("Testing user" + userId);
+            System.out.println(bucket.getAvailableTokens());
         } else {
             System.out.println("noooooooo");
             return false;
