@@ -1,0 +1,9 @@
+# depslib dependency file v1.0
+1734239818 source:/home/dsv/Desktop/Java/Projects/shellC++/main.cpp
+	<iostream>
+	<string>
+	<vector>
+	<sstream>
+	<unistd.h>
+	<sys/wait.h>
+
