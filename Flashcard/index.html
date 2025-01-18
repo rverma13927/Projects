@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Flashcard Practice</title>
+    <style>
+      body {
+        font-family: Arial, sans-serif;
+        text-align: center;
+        margin: 20px;
+      }
+      .flashcard {
+        margin: 20px auto;
+        border: 2px solid #ccc;
+        padding: 20px;
+        max-width: 600px;
+        border-radius: 10px;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+      }
+      button {
+        margin: 10px;
+        padding: 10px 20px;
+        border: none;
+        background-color: #007bff;
+        color: white;
+        border-radius: 5px;
+        cursor: pointer;
+      }
+      button:hover {
+        background-color: #0056b3;
+      }
+      .answer-content img {
+        max-width: 100%;
+        height: auto;
+        margin-top: 10px;
+      }
+    </style>
+  </head>
+  <body>
+    <h1>Flashcard Practice</h1>
+    <input type="file" id="fileInput" accept=".txt" multiple />
+    <div class="flashcard">
+      <h2 id="question">Select text files to start practicing!</h2>
+      <div id="answer" class="answer-content" style="display: none"></div>
+      <div>
+        <button id="showAnswerBtn" disabled>Show Answer</button>
+        <button id="nextQuestionBtn" disabled>Next Question</button>
+      </div>
+    </div>
+
+    <script src="script.js"></script>
+  </body>
+</html>

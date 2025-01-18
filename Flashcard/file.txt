@@ -1,0 +1,5 @@
+Q1: What is Autowired?
+AnsQ1: <p>Autowired is a Spring feature for dependency injection. It <b>automatically resolves</b> component dependencies during runtime.</p><img src="4543ac8ebdeb65aa.jpg" alt="Autowired diagram"></p><img src="4543ac8ebdeb65aa.jpg" alt="Autowired diagram"></p><img src="4543ac8ebdeb65aa.jpg" alt="Autowired diagram"></p><img src="4543ac8ebdeb65aa.jpg" alt="Autowired diagram"></p><img src="4543ac8ebdeb65aa.jpg" alt="Autowired diagram">
+
+Q2: What is IoC?
+AnsQ2: <p>IoC stands for Inversion of Control. It allows developers to decouple code and delegate object creation to a framework.</p><img src="4543ac8ebdeb65aa.jpg" alt="IoC example">
