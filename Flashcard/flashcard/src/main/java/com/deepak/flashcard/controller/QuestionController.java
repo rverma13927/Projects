@@ -1,8 +1,12 @@
 package com.deepak.flashcard.controller;
 
 
+import com.deepak.flashcard.dto.QuestionDTO;
 import com.deepak.flashcard.model.Question;
+import com.deepak.flashcard.model.Topic;
 import com.deepak.flashcard.repository.QuestionRepository;
+import com.deepak.flashcard.repository.TopicRepository;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -17,13 +21,21 @@ public class QuestionController {
 
     private final QuestionRepository questionRepository;
 
-    public QuestionController(QuestionRepository questionRepository) {
+    private final TopicRepository topicRepository;
+
+    public QuestionController(QuestionRepository questionRepository,TopicRepository topicRepository) {
         this.questionRepository = questionRepository;
+        this.topicRepository = topicRepository;
     }
 
-    @PostMapping("/add")
-    public ResponseEntity<Question> addQuestion(@RequestBody Question question) {
-        return ResponseEntity.ok(questionRepository.save(question));
+    @PostMapping
+    @RequestMapping("/add")
+    public ResponseEntity<?> addQuestion(@RequestBody QuestionDTO question) {
+        Topic topic = topicRepository.findById(question.getTopicId())
+                .orElseThrow(() -> new RuntimeException("Topic not found"));
+        Question q = new Question(question.getQuestionText(), topic,question.getAnswerHtml());
+
+        return ResponseEntity.ok(questionRepository.save(q));
     }
 
     @GetMapping("/all")
@@ -36,14 +48,10 @@ public class QuestionController {
         Optional<Question> question = questionRepository.findById(id);
         return question.map(ResponseEntity::ok).orElseGet(() -> ResponseEntity.notFound().build());
     }
-
     @GetMapping("/random")
-    public ResponseEntity<Question> getRandomQuestion() {
-        List<Question> allQuestions = questionRepository.findAll();
-        if (allQuestions.isEmpty()) {
-            return ResponseEntity.notFound().build();
-        }
-        Question randomQuestion = allQuestions.get(new Random().nextInt(allQuestions.size()));
-        return ResponseEntity.ok(randomQuestion);
+    public ResponseEntity<Question> getRandomQuestion(@RequestParam("topicId") Long topicId) {
+        return questionRepository.findRandomQuestionByTopic(Long.valueOf(topicId))
+                .map(ResponseEntity::ok)
+                .orElse(ResponseEntity.notFound().build());
     }
 }
