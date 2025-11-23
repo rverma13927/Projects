@@ -17,12 +17,11 @@ type KeyValueDb struct {
 }
 
 func NewKeyValueDb() *KeyValueDb {
-	file, error := os.OpenFile("db.log", os.O_APPEND|os.O_CREATE|os.O_WRONLY, 0666)
+	file, error := os.OpenFile("db.log", os.O_APPEND|os.O_CREATE|os.O_RDWR, 0666)
 	if error != nil {
 		fmt.Println("Error opening file", error)
 		return nil
 	}
-	defer file.Close()
 	return &KeyValueDb{
 		db:   make(map[string]string),
 		mu:   sync.RWMutex{},
@@ -30,12 +29,7 @@ func NewKeyValueDb() *KeyValueDb {
 	}
 }
 func (db *KeyValueDb) Load() error {
-	file, error := os.OpenFile(db.file.Name(), os.O_RDONLY, 0666)
-	if error != nil {
-		fmt.Println("Error while opening file", error)
-	}
-	defer file.Close()
-	scanner := bufio.NewScanner(file)
+	scanner := bufio.NewScanner(db.file)
 	for scanner.Scan() {
 		line := scanner.Text()
 
@@ -52,13 +46,9 @@ func (db *KeyValueDb) Load() error {
 func (db *KeyValueDb) Set(key string, value string) (string, error) {
 	db.mu.Lock()
 	defer db.mu.Unlock()
-	file, error := os.OpenFile(db.file.Name(), os.O_APPEND|os.O_WRONLY, 0666)
-	if error != nil {
-		fmt.Println("Error while opening file", error)
-	}
-	defer file.Close()
+
 	line := "SET," + key + "," + value + "\n"
-	val, error := file.Write([]byte(line))
+	val, error := db.file.Write([]byte(line))
 	fmt.Println(val)
 
 	if error != nil {
@@ -98,16 +88,8 @@ func (db *KeyValueDb) Delete(key string) (string, error) {
 	db.mu.Lock()
 	defer db.mu.Unlock()
 
-	file, error := os.OpenFile(db.file.Name(), os.O_APPEND|os.O_WRONLY, 0666)
-	if error != nil {
-		fmt.Println("Error while opening file", error)
-	}
-	defer file.Close()
 	line := "DELETE," + key + "\n"
-	file.Write([]byte(line))
-	if error != nil {
-		fmt.Println("Error while writing to file", error)
-	}
+	db.file.Write([]byte(line))
 	delete(db.db, key)
 	return "Value has been deleted", nil
 }
